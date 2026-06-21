@@ -5,10 +5,10 @@
 ## Samples
 
 - [Bounded Context Domain Modules](./bounded-context-domain-modules)
+- [Querydsl to Exposed kapt Removal](./querydsl-to-exposed-kapt-removal)
 
 ## Run
 
 ```sh
 ./gradlew test
 ```
-

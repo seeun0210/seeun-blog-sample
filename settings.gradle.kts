@@ -23,3 +23,4 @@ include("bounded-context-domain-modules:domain:organization")
 include("bounded-context-domain-modules:support:persistence")
 include("bounded-context-domain-modules:architecture-tests")
 
+include("querydsl-to-exposed-kapt-removal")
