@@ -24,3 +24,5 @@ include("bounded-context-domain-modules:support:persistence")
 include("bounded-context-domain-modules:architecture-tests")
 
 include("querydsl-to-exposed-kapt-removal")
+include("sqs-lambda-to-temporal")
+include("spring-ai-anthropic-cost-advisor")
