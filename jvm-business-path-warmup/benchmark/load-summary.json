@@ -1,0 +1,16 @@
+{
+  "duration_seconds": 59.997,
+  "requests": 2864,
+  "successful_requests": 2864,
+  "success_rate_percent": 100.0,
+  "average_requests_per_second": 47.7,
+  "peak_requests_per_second": 111,
+  "latency_ms": {
+    "p50": 7.173,
+    "p95": 14.671,
+    "p99": 35.73,
+    "max": 61.616
+  },
+  "phases_requests_per_second": [12, 45, 110, 25, 90, 35],
+  "note": "Local Docker load test with synthetic records; not production traffic."
+}

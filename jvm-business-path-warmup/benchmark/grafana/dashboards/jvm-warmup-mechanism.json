@@ -1,0 +1,657 @@
+{
+  "uid": "jvm-warmup-mechanism",
+  "title": "JDK 25 AOTCache + Business-path Warmup · Runtime Flow",
+  "tags": [
+    "jvm",
+    "warmup",
+    "jdk25",
+    "mechanism"
+  ],
+  "timezone": "browser",
+  "schemaVersion": 42,
+  "version": 1,
+  "refresh": "",
+  "time": {
+    "from": "now-5m",
+    "to": "now"
+  },
+  "timepicker": {},
+  "annotations": {
+    "list": []
+  },
+  "templating": {
+    "list": []
+  },
+  "panels": [
+    {
+      "id": 101,
+      "title": "IMAGE BUILD · AOT TRAINING",
+      "type": "text",
+      "gridPos": {
+        "x": 0,
+        "y": 0,
+        "w": 24,
+        "h": 2
+      },
+      "transparent": false,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "",
+        "mode": "markdown"
+      }
+    },
+    {
+      "id": 102,
+      "title": "① JVM 시작",
+      "type": "text",
+      "gridPos": {
+        "x": 0,
+        "y": 2,
+        "w": 4,
+        "h": 5
+      },
+      "transparent": false,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "## Bytecode\n\n애플리케이션 JAR과 전체 classpath를 읽는다.",
+        "mode": "markdown"
+      }
+    },
+    {
+      "id": 103,
+      "title": "→",
+      "type": "text",
+      "gridPos": {
+        "x": 4,
+        "y": 2,
+        "w": 1,
+        "h": 5
+      },
+      "transparent": true,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "# →",
+        "mode": "markdown"
+      }
+    },
+    {
+      "id": 104,
+      "title": "② Training run",
+      "type": "text",
+      "gridPos": {
+        "x": 5,
+        "y": 2,
+        "w": 4,
+        "h": 5
+      },
+      "transparent": false,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "## `/v3/api-docs × 100`\n\n이 경로에서 실제로 쓰인 class와 method profile만 관찰된다.",
+        "mode": "markdown"
+      }
+    },
+    {
+      "id": 105,
+      "title": "→",
+      "type": "text",
+      "gridPos": {
+        "x": 9,
+        "y": 2,
+        "w": 1,
+        "h": 5
+      },
+      "transparent": true,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "# →",
+        "mode": "markdown"
+      }
+    },
+    {
+      "id": 106,
+      "title": "③ JEP 483",
+      "type": "text",
+      "gridPos": {
+        "x": 10,
+        "y": 2,
+        "w": 4,
+        "h": 5
+      },
+      "transparent": false,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "## Class state\n\n읽기·파싱·로딩·링킹이 끝난 class 상태를 저장한다.",
+        "mode": "markdown"
+      }
+    },
+    {
+      "id": 107,
+      "title": "+",
+      "type": "text",
+      "gridPos": {
+        "x": 14,
+        "y": 2,
+        "w": 1,
+        "h": 5
+      },
+      "transparent": true,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "# +",
+        "mode": "markdown"
+      }
+    },
+    {
+      "id": 108,
+      "title": "④ JEP 515",
+      "type": "text",
+      "gridPos": {
+        "x": 15,
+        "y": 2,
+        "w": 4,
+        "h": 5
+      },
+      "transparent": false,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "## Method profile\n\n호출 빈도·분기·타입 profile을 저장해 JIT의 출발점을 앞당긴다.",
+        "mode": "markdown"
+      }
+    },
+    {
+      "id": 109,
+      "title": "→",
+      "type": "text",
+      "gridPos": {
+        "x": 19,
+        "y": 2,
+        "w": 1,
+        "h": 5
+      },
+      "transparent": true,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "# →",
+        "mode": "markdown"
+      }
+    },
+    {
+      "id": 110,
+      "title": "⑤ AOT cache",
+      "type": "text",
+      "gridPos": {
+        "x": 20,
+        "y": 2,
+        "w": 4,
+        "h": 5
+      },
+      "transparent": false,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "## `app.aot`\n\n다음 실행에서 `-XX:AOTCache=app.aot`로 로드한다.\n\n**JIT 컴파일 비용 자체는 남는다.**",
+        "mode": "markdown"
+      }
+    },
+    {
+      "id": 111,
+      "title": "CONTROL · BUSINESS PATH NOT TRAINED",
+      "type": "text",
+      "gridPos": {
+        "x": 0,
+        "y": 7,
+        "w": 24,
+        "h": 2
+      },
+      "transparent": false,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "",
+        "mode": "markdown"
+      }
+    },
+    {
+      "id": 112,
+      "title": "① AOT load",
+      "type": "text",
+      "gridPos": {
+        "x": 0,
+        "y": 9,
+        "w": 4,
+        "h": 5
+      },
+      "transparent": false,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "## `app.aot` 로드\n\n문서 경로에서 학습한 class state와 method profile을 복원한다.",
+        "mode": "markdown"
+      }
+    },
+    {
+      "id": 113,
+      "title": "→",
+      "type": "text",
+      "gridPos": {
+        "x": 4,
+        "y": 9,
+        "w": 1,
+        "h": 5
+      },
+      "transparent": true,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "# →",
+        "mode": "markdown"
+      }
+    },
+    {
+      "id": 114,
+      "title": "② Spring",
+      "type": "text",
+      "gridPos": {
+        "x": 5,
+        "y": 9,
+        "w": 4,
+        "h": 5
+      },
+      "transparent": false,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "## Context 시작\n\n빈 생성과 서버 바인딩을 마친다.",
+        "mode": "markdown"
+      }
+    },
+    {
+      "id": 115,
+      "title": "→",
+      "type": "text",
+      "gridPos": {
+        "x": 9,
+        "y": 9,
+        "w": 1,
+        "h": 5
+      },
+      "transparent": true,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "# →",
+        "mode": "markdown"
+      }
+    },
+    {
+      "id": 116,
+      "title": "③ Readiness",
+      "type": "text",
+      "gridPos": {
+        "x": 10,
+        "y": 9,
+        "w": 4,
+        "h": 5
+      },
+      "transparent": false,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "## `UP`\n\n비즈니스 경로를 실행하지 않은 채 외부 트래픽을 받는다.",
+        "mode": "markdown"
+      }
+    },
+    {
+      "id": 117,
+      "title": "→",
+      "type": "text",
+      "gridPos": {
+        "x": 14,
+        "y": 9,
+        "w": 1,
+        "h": 5
+      },
+      "transparent": true,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "# →",
+        "mode": "markdown"
+      }
+    },
+    {
+      "id": 118,
+      "title": "④ First user",
+      "type": "text",
+      "gridPos": {
+        "x": 15,
+        "y": 9,
+        "w": 4,
+        "h": 5
+      },
+      "transparent": false,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "## 숨은 초기화\n\nMVC route · Jackson · DB mapping · branch/type profile · JIT compilation",
+        "mode": "markdown"
+      }
+    },
+    {
+      "id": 119,
+      "title": "=",
+      "type": "text",
+      "gridPos": {
+        "x": 19,
+        "y": 9,
+        "w": 1,
+        "h": 5
+      },
+      "transparent": true,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "# =",
+        "mode": "markdown"
+      }
+    },
+    {
+      "id": 120,
+      "title": "첫 비즈니스 요청",
+      "type": "text",
+      "gridPos": {
+        "x": 20,
+        "y": 9,
+        "w": 4,
+        "h": 5
+      },
+      "transparent": false,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "# 112.7 ms\n\nWarm p50 17.1 ms\n\nCold penalty **95.6 ms**",
+        "mode": "markdown"
+      }
+    },
+    {
+      "id": 121,
+      "title": "BUSINESS-PATH WARMUP · COST MOVED BEFORE TRAFFIC",
+      "type": "text",
+      "gridPos": {
+        "x": 0,
+        "y": 14,
+        "w": 24,
+        "h": 2
+      },
+      "transparent": false,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "",
+        "mode": "markdown"
+      }
+    },
+    {
+      "id": 122,
+      "title": "① Readiness gate",
+      "type": "text",
+      "gridPos": {
+        "x": 0,
+        "y": 16,
+        "w": 4,
+        "h": 5
+      },
+      "transparent": false,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "## `OUT_OF_SERVICE`\n\nwarmup이 끝날 때까지 로드밸런서 트래픽을 차단한다.",
+        "mode": "markdown"
+      }
+    },
+    {
+      "id": 123,
+      "title": "→",
+      "type": "text",
+      "gridPos": {
+        "x": 4,
+        "y": 16,
+        "w": 1,
+        "h": 5
+      },
+      "transparent": true,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "# →",
+        "mode": "markdown"
+      }
+    },
+    {
+      "id": 124,
+      "title": "② Internal GET",
+      "type": "text",
+      "gridPos": {
+        "x": 5,
+        "y": 16,
+        "w": 4,
+        "h": 5
+      },
+      "transparent": false,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "## 실제 비즈니스 API\n\n`GET /teacher-profiles`\n\n중앙값 **490.4 ms**",
+        "mode": "markdown"
+      }
+    },
+    {
+      "id": 125,
+      "title": "→",
+      "type": "text",
+      "gridPos": {
+        "x": 9,
+        "y": 16,
+        "w": 1,
+        "h": 5
+      },
+      "transparent": true,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "# →",
+        "mode": "markdown"
+      }
+    },
+    {
+      "id": 126,
+      "title": "③ Runtime warmup",
+      "type": "text",
+      "gridPos": {
+        "x": 10,
+        "y": 16,
+        "w": 4,
+        "h": 5
+      },
+      "transparent": false,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "## 실제 실행\n\nroute · serializer · DB · profile/JIT 경로를 한 번 통과한다.",
+        "mode": "markdown"
+      }
+    },
+    {
+      "id": 127,
+      "title": "→",
+      "type": "text",
+      "gridPos": {
+        "x": 14,
+        "y": 16,
+        "w": 1,
+        "h": 5
+      },
+      "transparent": true,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "# →",
+        "mode": "markdown"
+      }
+    },
+    {
+      "id": 128,
+      "title": "④ Readiness",
+      "type": "text",
+      "gridPos": {
+        "x": 15,
+        "y": 16,
+        "w": 4,
+        "h": 5
+      },
+      "transparent": false,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "## `UP`\n\n모든 warmup 요청이 2xx일 때만 트래픽을 연다.",
+        "mode": "markdown"
+      }
+    },
+    {
+      "id": 129,
+      "title": "=",
+      "type": "text",
+      "gridPos": {
+        "x": 19,
+        "y": 16,
+        "w": 1,
+        "h": 5
+      },
+      "transparent": true,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "# =",
+        "mode": "markdown"
+      }
+    },
+    {
+      "id": 130,
+      "title": "첫 사용자 요청",
+      "type": "text",
+      "gridPos": {
+        "x": 20,
+        "y": 16,
+        "w": 4,
+        "h": 5
+      },
+      "transparent": false,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "# 47.9 ms\n\nWarm p50 16.2 ms\n\nCold penalty **31.7 ms**",
+        "mode": "markdown"
+      }
+    }
+  ]
+}

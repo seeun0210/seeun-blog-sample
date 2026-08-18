@@ -1,0 +1,135 @@
+{
+  "generated_at": "2026-08-17T16:32:43.478Z",
+  "environment": {
+    "image": "sclass-warmup-benchmark:develop",
+    "image_source_commit": "ab20e0ad17322ecac7cfa279c2750e228fedad99",
+    "runtime": "Eclipse Temurin JRE 25.0.3, JDK 25 AOTCache",
+    "architecture": "Docker Desktop ARM64",
+    "resources": "1 CPU, 768 MiB, heap 128-352 MiB",
+    "repetitions_per_condition": 5,
+    "business_path": "/api/v1/catalog/teacher-profiles?scope=SUPPORTER",
+    "synthetic_profiles": 20
+  },
+  "conditions": {
+    "control": {
+      "ready_ms": {
+        "median": 6826,
+        "min": 6707,
+        "max": 7506
+      },
+      "spring_started_s": {
+        "median": 5.786,
+        "min": 5.603,
+        "max": 6.498
+      },
+      "warmup_duration_ms": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "first_total_ms": {
+        "median": 112.691,
+        "min": 99.336,
+        "max": 184.19
+      },
+      "warm_p50_ms": {
+        "median": 17.115,
+        "min": 14.76,
+        "max": 17.947
+      },
+      "warm_p95_ms": {
+        "median": 73.375,
+        "min": 63.246,
+        "max": 75.609
+      },
+      "memory_post_mib": {
+        "median": 443.5,
+        "min": 440.9,
+        "max": 447.8
+      }
+    },
+    "business": {
+      "ready_ms": {
+        "median": 7539,
+        "min": 6889,
+        "max": 11568
+      },
+      "spring_started_s": {
+        "median": 5.999,
+        "min": 5.48,
+        "max": 6.21
+      },
+      "warmup_duration_ms": {
+        "median": 490.402,
+        "min": 447.739,
+        "max": 678.254
+      },
+      "first_total_ms": {
+        "median": 47.916,
+        "min": 20.984,
+        "max": 50.231
+      },
+      "warm_p50_ms": {
+        "median": 16.202,
+        "min": 13.23,
+        "max": 23.427
+      },
+      "warm_p95_ms": {
+        "median": 63.378,
+        "min": 59.598,
+        "max": 70.274
+      },
+      "memory_post_mib": {
+        "median": 473,
+        "min": 470.1,
+        "max": 476
+      }
+    }
+  },
+  "paired_rounds": [
+    {
+      "round": 1,
+      "control_first_ms": 184.19,
+      "business_first_ms": 47.916,
+      "reduction_percent": 74
+    },
+    {
+      "round": 2,
+      "control_first_ms": 183.817,
+      "business_first_ms": 23.708,
+      "reduction_percent": 87.1
+    },
+    {
+      "round": 3,
+      "control_first_ms": 99.336,
+      "business_first_ms": 20.984,
+      "reduction_percent": 78.9
+    },
+    {
+      "round": 4,
+      "control_first_ms": 104.274,
+      "business_first_ms": 50.231,
+      "reduction_percent": 51.8
+    },
+    {
+      "round": 5,
+      "control_first_ms": 112.691,
+      "business_first_ms": 50.173,
+      "reduction_percent": 55.5
+    }
+  ],
+  "comparison": {
+    "median_first_request_reduction_percent": 57.5,
+    "control_cold_penalty_ms": 95.576,
+    "business_cold_penalty_ms": 31.714,
+    "cold_penalty_reduction_percent": 66.8,
+    "ready_median_delta_ms": 713,
+    "memory_median_delta_mib": 29.5
+  },
+  "limitations": [
+    "Local Docker benchmark, not production traffic",
+    "Twenty synthetic public teacher profiles, not production records",
+    "The runtime warmup implementation calls each configured path once",
+    "The image AOT cache was held constant and had been trained with /v3/api-docs"
+  ]
+}

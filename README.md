@@ -6,6 +6,7 @@
 
 - [Bounded Context Domain Modules](./bounded-context-domain-modules)
 - [Querydsl to Exposed kapt Removal](./querydsl-to-exposed-kapt-removal)
+- [JVM Business-path Warmup](./jvm-business-path-warmup)
 
 ## Run
 
