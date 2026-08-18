@@ -2,7 +2,7 @@
 
 JDK 25 AOTCache를 유지하면서 실제 비즈니스 경로에 남은 첫 요청 비용을 readiness 이전으로 옮기는 최소 예제입니다.
 
-- 블로그: [“방금 배포하셨나요?”에서 시작한 JVM 첫 요청 warmup](https://blog.seeun.site/posts/jvm-aotcache-business-path-warmup)
+- 블로그: [배포만 하면 느려지는 API? JVM 첫 요청 Warmup 개선기](https://blog.seeun.site/posts/jvm-aotcache-business-path-warmup)
 - 측정 원본과 Grafana 재현: [`benchmark`](./benchmark)
 
 ## 구성
