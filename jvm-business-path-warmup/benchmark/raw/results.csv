@@ -1,0 +1,11 @@
+round,order,condition,warmup_enabled,warmup_path,ready_ms,spring_started_s,warmup_duration,first_code,first_ttfb_ms,first_total_ms,warm_p50_ms,warm_p95_ms,warm_max_ms,response_bytes,response_items,memory_post_mib,memory_peak_mib
+1,1,control,false,/v3/api-docs,6762,5.703,,200,183.274,184.190,17.947,65.832,75.173,12698,20,447.800,447.800
+1,2,business,true,/api/v1/catalog/teacher-profiles?scope=SUPPORTER,7539,5.999,454.134625ms,200,47.728,47.916,16.202,64.045,67.905,12698,20,473.000,473.000
+2,1,business,true,/api/v1/catalog/teacher-profiles?scope=SUPPORTER,7139,5.674,490.401750ms,200,23.025,23.708,23.427,70.274,81.451,12698,20,473.500,473.500
+2,2,control,false,/v3/api-docs,6826,5.786,,200,182.132,183.817,17.115,63.246,69.915,12698,20,443.300,446.100
+3,1,control,false,/v3/api-docs,7357,6.378,,200,98.897,99.336,14.760,75.609,76.169,12698,20,444.400,444.400
+3,2,business,true,/api/v1/catalog/teacher-profiles?scope=SUPPORTER,7845,6.21,678.254292ms,200,20.307,20.984,21.089,63.378,64.275,12698,20,470.100,470.100
+4,1,business,true,/api/v1/catalog/teacher-profiles?scope=SUPPORTER,6889,5.48,447.739126ms,200,50.033,50.231,14.174,59.598,61.888,12698,20,476.000,476.000
+4,2,control,false,/v3/api-docs,6707,5.603,,200,103.889,104.274,15.257,73.375,75.730,12698,20,443.500,443.500
+5,1,control,false,/v3/api-docs,7506,6.498,,200,112.405,112.691,17.764,74.018,74.177,12698,20,440.900,441.000
+5,2,business,true,/api/v1/catalog/teacher-profiles?scope=SUPPORTER,11568,6.09,536.170708ms,200,49.987,50.173,13.230,60.973,62.097,12698,20,471.800,471.800
