@@ -1,9 +1,9 @@
 # Spring MVC thread anatomy
 
-Spring MVC가 요청을 어떤 스레드로 처리하는지, 가상 스레드를 켜면 무엇이 바뀌고 무엇이 그대로인지를 직접 재현하는 최소 예제입니다. 톰캣 워커 풀, JDK 21의 pinning, 커넥션 풀 상한, `@Transactional`의 커넥션 점유를 각각 측정 가능한 엔드포인트로 분리했습니다.
+Spring MVC가 요청을 어떤 스레드로 처리하는지, 가상 스레드를 켜면 무엇이 바뀌고 무엇이 그대로인지를 직접 재현하는 최소 예제입니다. 톰캣 워커 풀, JDK 21의 pinning, 커넥션 풀 크기, `@Transactional`의 커넥션 점유를 각각 측정 가능한 엔드포인트로 분리했습니다.
 
-- 블로그 1편: Node.js와 다른 Java의 요청 처리 모델과 가상 스레드 pinning
-- 블로그 2편: `@Transactional`이 ThreadLocal에 묶여 있다는 것의 실제 비용
+- 블로그 1편: [요청 하나에 스레드 하나, 정말 그런가](https://blog.seeun.site/posts/spring-mvc-thread-model-virtual-thread-pinning)
+- 블로그 2편: [@Transactional의 정체는 ThreadLocal이다](https://blog.seeun.site/posts/transactional-threadlocal-connection-hold)
 - 측정 원본과 재현 스크립트: [`benchmark`](./benchmark)
 
 ## 엔드포인트
