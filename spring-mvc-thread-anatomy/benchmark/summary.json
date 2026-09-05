@@ -1,0 +1,63 @@
+{
+  "environment": {
+    "os": "macOS 15 (arm64)",
+    "cores": 12,
+    "springBoot": "4.1.1",
+    "springFramework": "7.0.9",
+    "tomcat": "11.0.24",
+    "hikariCP": "7.0.2",
+    "jdks": ["temurin-21.0.12.1", "openjdk-25.0.2"],
+    "note": "동일 bootJar를 실행 JVM만 바꿔가며 측정. 각 측정 전 warmup 1회."
+  },
+  "findings": [
+    {
+      "id": "platform-vs-virtual",
+      "claim": "가상 스레드를 켜면 threads.max 상한이 사라진다",
+      "setup": "threads.max=5, 동시 8요청, 각 1000ms 블로킹",
+      "platform_s": 2.07,
+      "virtual_s": 1.07,
+      "raw": "raw/platform-vs-virtual.csv"
+    },
+    {
+      "id": "pinning-2x2",
+      "claim": "JDK 21에서 synchronized 안의 블로킹은 캐리어를 잠근다",
+      "setup": "캐리어 1개, 동시 4요청, 각 1000ms 블로킹, 락 경합 0",
+      "jdk21": { "synchronized_s": 4.05, "reentrantLock_s": 1.03 },
+      "jdk25": { "synchronized_s": 1.03, "reentrantLock_s": 1.03 },
+      "evidence": "jdk.tracePinnedThreads=short 에서 reason:MONITOR + monitors:1"
+    },
+    {
+      "id": "pinning-scales-with-carriers",
+      "claim": "피닝 시 동시 처리량은 정확히 캐리어 수(기본값 = availableProcessors)로 제한된다",
+      "setup": "동시 24요청, 각 200ms 블로킹",
+      "maxAbsoluteErrorVsTheory_s": 0.04,
+      "raw": ["raw/pinning-parallelism.csv", "raw/pinning-cpu.csv"]
+    },
+    {
+      "id": "connection-pool-ceiling",
+      "claim": "가상 스레드를 켜도 동시 쿼리 수는 커넥션 풀 크기가 상한",
+      "setup": "가상 스레드 ON, 동시 8요청, 각 200ms 쿼리",
+      "matchesTheory": true,
+      "jdk21EqualsJdk25": true,
+      "raw": "raw/connection-pool.csv"
+    },
+    {
+      "id": "transaction-holds-connection",
+      "claim": "@Transactional은 쿼리가 없어도 진입 시점에 커넥션을 잡는다",
+      "setup": "풀 크기 2, 동시 8요청, 각 200ms 대기, SQL 0회",
+      "transactional_s": 0.85,
+      "nonTransactional_s": 0.23,
+      "poolDuringWait": { "transactional": "active=2 idle=0 awaiting=6", "plain": "active=0 idle=2 awaiting=0" },
+      "raw": "raw/transaction-hold.csv"
+    },
+    {
+      "id": "transaction-does-not-cross-threads",
+      "claim": "새 스레드는 트랜잭션 ThreadLocal을 못 봐서 별도 커넥션·별도 트랜잭션이 된다",
+      "observed": {
+        "parent": "txActive=true, resource=true, conn0",
+        "child": "txActive=false, resource=false, conn1",
+        "afterParentRollback": "child 행만 생존"
+      }
+    }
+  ]
+}

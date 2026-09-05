@@ -1,0 +1,3 @@
+mode,threads_max,requests,block_ms,elapsed_s,thread_names
+platform,5,8,1000,2.07,http-nio-8080-exec-1..5
+virtual,5(ignored),8,1000,1.07,tomcat-handler-0..7
